@@ -13,19 +13,19 @@ public class JvmUtils {
      ///////////// VM Properties //////////////
     //////////////////////////////////////////
 
-    public static final String vmName() {
+    public static String vmName() {
         return System.getProperty("java.vm.name");
     }
 
-    public static final String vmVersion() {
+    public static String vmVersion() {
         return System.getProperty("java.vm.version");
     }
 
-    public static final String vmSpecVersion() {
+    public static String vmSpecVersion() {
         return System.getProperty("java.vm.specification.version");
     }
 
-    public static final String vmArch() {
+    public static String vmArch() {
         return System.getProperty("sun.arch.data.model");
     }
 
@@ -34,11 +34,11 @@ public class JvmUtils {
      ///////////// JRE Properties ///////////
     ////////////////////////////////////////
 
-    public static final String jreSpecVersion() {
+    public static String jreSpecVersion() {
         return System.getProperty("java.specification.version");
     }
 
-    public static final String jreVersion() {
+    public static String jreVersion() {
         return System.getProperty("java.version");
     }
 
@@ -47,7 +47,7 @@ public class JvmUtils {
      ////////////// OS Properties ///////////
     ////////////////////////////////////////
 
-    public static final String osArch() {
+    public static String osArch() {
         return System.getProperty("os.arch");
     }
 
@@ -62,9 +62,9 @@ public class JvmUtils {
      * release memory to the system over time.
      * The value of init may be undefined.
      *
-     * @return
+     * @return memory
      */
-    public static final long initialMemory() {
+    public static long initialMemory() {
         long memory = 0;
         for (MemoryPoolMXBean mp : ManagementFactory.getMemoryPoolMXBeans()) {
             memory += mp.getUsage().getInit();
@@ -77,7 +77,7 @@ public class JvmUtils {
      *
      * @return memory
      */
-    public static final long usedMemory() {
+    public static long usedMemory() {
         long memory = 0;
         for (MemoryPoolMXBean mp : ManagementFactory.getMemoryPoolMXBeans()) {
             memory += mp.getUsage().getUsed();
@@ -91,7 +91,7 @@ public class JvmUtils {
      *
      * @return memory
      */
-    public static final long committedMemory() {
+    public static long committedMemory() {
         long memory = 0;
         for (MemoryPoolMXBean mp : ManagementFactory.getMemoryPoolMXBeans()) {
             memory += mp.getUsage().getUsed();
@@ -104,14 +104,19 @@ public class JvmUtils {
      * Its value may be undefined. The maximum amount of memory may change over time if defined.
      * The amount of used and committed memory will always be less than or equal to max if max is defined.
      *
-     * @return
+     * @return memory
      */
-    public static final long maxMemory() {
+    public static long maxMemory() {
         long memory = 0;
         for (MemoryPoolMXBean mp : ManagementFactory.getMemoryPoolMXBeans()) {
             memory += mp.getUsage().getMax();
         }
         return memory;
+    }
+
+    public static MemoryLayout memoryLayout() {
+        // TODO implement
+        return null;
     }
 
     public static void printAll() {
@@ -133,22 +138,15 @@ public class JvmUtils {
 
         System.out.println("\n\nMemory Information");
         System.out.println("=============================================");
-        System.out.println("Initial Memory:       " + bytesToHuman(initialMemory()));
-        System.out.println("Used Memory:          " + bytesToHuman(usedMemory()));
-        System.out.println("Committed  Memory:    " + bytesToHuman(committedMemory()));
-        System.out.println("Max Memory:           " + bytesToHuman(maxMemory()));
+        System.out.println("Initial Memory:       " + printableBytes(initialMemory()));
+        System.out.println("Used Memory:          " + printableBytes(usedMemory()));
+        System.out.println("Committed  Memory:    " + printableBytes(committedMemory()));
+        System.out.println("Max Memory:           " + printableBytes(maxMemory()));
 
     }
 
 
-    private static String floatForm(double d)
-    {
-        return new DecimalFormat("#.##").format(d);
-    }
-
-
-    private static String bytesToHuman(long size)
-    {
+    private static String printableBytes(long size) {
         long Kb = 1  * 1024;
         long Mb = Kb * 1024;
         long Gb = Mb * 1024;
@@ -156,15 +154,19 @@ public class JvmUtils {
         long Pb = Tb * 1024;
         long Eb = Pb * 1024;
 
-        if (size <  Kb)                 return floatForm(        size     ) + " byte";
-        if (size >= Kb && size < Mb)    return floatForm((double)size / Kb) + " Kb";
-        if (size >= Mb && size < Gb)    return floatForm((double)size / Mb) + " Mb";
-        if (size >= Gb && size < Tb)    return floatForm((double)size / Gb) + " Gb";
-        if (size >= Tb && size < Pb)    return floatForm((double)size / Tb) + " Tb";
-        if (size >= Pb && size < Eb)    return floatForm((double)size / Pb) + " Pb";
-        if (size >= Eb)                 return floatForm((double)size / Eb) + " Eb";
+        if (size <  Kb)                 return format(        size     ) + " byte";
+        if (size >= Kb && size < Mb)    return format((double)size / Kb) + " Kb";
+        if (size >= Mb && size < Gb)    return format((double)size / Mb) + " Mb";
+        if (size >= Gb && size < Tb)    return format((double)size / Gb) + " Gb";
+        if (size >= Tb && size < Pb)    return format((double)size / Tb) + " Tb";
+        if (size >= Pb && size < Eb)    return format((double)size / Pb) + " Pb";
+        if (size >= Eb)                 return format((double)size / Eb) + " Eb";
 
-        return "???";
+        return "";
+    }
+
+    private static String format(double d) {
+        return new DecimalFormat("#.##").format(d);
     }
 
     // List of properties
