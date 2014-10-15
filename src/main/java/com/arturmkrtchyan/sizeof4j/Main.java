@@ -5,7 +5,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        //JvmUtils.printAll();
+        JvmUtils.printAll();
 
         System.out.println(SizeOf.sizeOf((byte)1));
         System.out.println(SizeOf.sizeOf(false));

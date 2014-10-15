@@ -7,6 +7,9 @@ import java.text.DecimalFormat;
 
 public class JvmUtils {
 
+    private static final String ARCH_32 = "32";
+    private static final String ARCH_64 = "64";
+
     private JvmUtils() {}
 
       //////////////////////////////////////////
@@ -115,8 +118,64 @@ public class JvmUtils {
     }
 
     public static MemoryLayout memoryLayout() {
-        // TODO implement
+        final String vmArch = vmArch();
+
+        if(ARCH_32.equals(vmArch)) {
+            return memoryLayout32();
+        } else if(ARCH_64.equals(vmArch)) {
+            return memoryLayout64();
+        }
+        // FIXME compressed OOPs
+        // FIXME exception for unknown arch
         return null;
+    }
+
+    private static MemoryLayout memoryLayout32() {
+        return new MemoryLayout() {
+            @Override public int arrayHeaderSize() {
+                return 12;
+            }
+
+            @Override public int objectHeaderSize() {
+                return 8;
+            }
+
+            @Override public int objectPadding() {
+                return 8;
+            }
+
+            @Override public int referenceSize() {
+                return 4;
+            }
+
+            @Override public int superClassFieldPadding() {
+                return 4;
+            }
+        };
+    }
+
+    private static MemoryLayout memoryLayout64() {
+        return new MemoryLayout() {
+            @Override public int arrayHeaderSize() {
+                return 24;
+            }
+
+            @Override public int objectHeaderSize() {
+                return 16;
+            }
+
+            @Override public int objectPadding() {
+                return 8;
+            }
+
+            @Override public int referenceSize() {
+                return 8;
+            }
+
+            @Override public int superClassFieldPadding() {
+                return 8;
+            }
+        };
     }
 
     public static void printAll() {
@@ -154,13 +213,13 @@ public class JvmUtils {
         long Pb = Tb * 1024;
         long Eb = Pb * 1024;
 
-        if (size <  Kb)                 return format(        size     ) + " byte";
-        if (size >= Kb && size < Mb)    return format((double)size / Kb) + " Kb";
-        if (size >= Mb && size < Gb)    return format((double)size / Mb) + " Mb";
-        if (size >= Gb && size < Tb)    return format((double)size / Gb) + " Gb";
-        if (size >= Tb && size < Pb)    return format((double)size / Tb) + " Tb";
-        if (size >= Pb && size < Eb)    return format((double)size / Pb) + " Pb";
-        if (size >= Eb)                 return format((double)size / Eb) + " Eb";
+        if (size <  Kb)                 return format(size) + " byte";
+        if (size >= Kb && size < Mb)    return format((double) size / Kb) + " Kb";
+        if (size >= Mb && size < Gb)    return format((double) size / Mb) + " Mb";
+        if (size >= Gb && size < Tb)    return format((double) size / Gb) + " Gb";
+        if (size >= Tb && size < Pb)    return format((double) size / Tb) + " Tb";
+        if (size >= Pb && size < Eb)    return format((double) size / Pb) + " Pb";
+        if (size >= Eb)                 return format((double) size / Eb) + " Eb";
 
         return "";
     }
