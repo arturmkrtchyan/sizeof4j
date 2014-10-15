@@ -1,4 +1,4 @@
 sizeof4j
 ========
 
-sizeof for Java
+A Java library for measuring memory size of your Java objects.
