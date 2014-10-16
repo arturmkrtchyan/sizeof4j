@@ -8,18 +8,18 @@ public class JvmUtilsTest {
 
     @Test
     public void testVmName() throws Exception {
-        assertNotNull(JvmUtils.vmName());
-        assertNotEquals(JvmUtils.vmName(), "");
+        assertNotNull(JvmUtil.vmName());
+        assertNotEquals(JvmUtil.vmName(), "");
     }
 
     @Test
     public void testVmVersion() throws Exception {
-        assertNotNull(JvmUtils.vmVersion());
-        assertNotEquals(JvmUtils.vmVersion(), "");
+        assertNotNull(JvmUtil.vmVersion());
+        assertNotEquals(JvmUtil.vmVersion(), "");
     }
 
     @Test
     public void testUnsafe() throws Exception {
-        assertNotNull(JvmUtils.unsafe());
+        assertNotNull(JvmUtil.unsafe());
     }
 }

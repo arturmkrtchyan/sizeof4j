@@ -8,14 +8,16 @@ import java.lang.management.MemoryPoolMXBean;
 import java.lang.reflect.Field;
 import java.text.DecimalFormat;
 
-public class JvmUtils {
+public class JvmUtil {
 
     private static final String ARCH_32 = "32";
     private static final String ARCH_64 = "64";
 
+    private static final long HEAP_30GB = 30L * 1024 * 1024 * 1024;
+
     private static Unsafe unsafe;
 
-    private JvmUtils() {}
+    private JvmUtil() {}
 
       //////////////////////////////////////////
      ///////////// VM Properties //////////////
@@ -141,10 +143,11 @@ public class JvmUtils {
         if(ARCH_32.equals(vmArch)) {
             return memoryLayout32();
         } else if(ARCH_64.equals(vmArch)) {
+            if(maxMemory() < HEAP_30GB) {
+                return memoryLayoutCompressedOOPs();
+            }
             return memoryLayout64();
         }
-        // FIXME compressed OOPs
-        // FIXME exception for unknown arch
         return null;
     }
 
@@ -192,6 +195,30 @@ public class JvmUtils {
 
             @Override public int superClassFieldPadding() {
                 return 8;
+            }
+        };
+    }
+
+    private static MemoryLayout memoryLayoutCompressedOOPs() {
+        return new MemoryLayout() {
+            @Override public int arrayHeaderSize() {
+                return 16;
+            }
+
+            @Override public int objectHeaderSize() {
+                return 12;
+            }
+
+            @Override public int objectPadding() {
+                return 8;
+            }
+
+            @Override public int referenceSize() {
+                return 4;
+            }
+
+            @Override public int superClassFieldPadding() {
+                return 4;
             }
         };
     }

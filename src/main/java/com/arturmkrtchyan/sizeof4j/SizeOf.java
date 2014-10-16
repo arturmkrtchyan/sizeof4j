@@ -1,7 +1,12 @@
 package com.arturmkrtchyan.sizeof4j;
 
 
+import com.arturmkrtchyan.sizeof4j.calculation.CalculationStrategy;
+import com.arturmkrtchyan.sizeof4j.calculation.SpecCalculationStrategy;
+
 public class SizeOf {
+
+    static CalculationStrategy calculator = new SpecCalculationStrategy();
 
     public static int booleanSize() {
         return Primitive._boolean.size();
@@ -35,21 +40,20 @@ public class SizeOf {
         return Primitive._double.size();
     }
 
-    public static int objectSize(Object object) {
+    public static int objectShallowSize(Object object) {
+        return calculator.calculateShallow(object);
+    }
+
+    public static int objectShallowSize() {
+        return objectShallowSize(new Object());
+    }
+
+    public static <T> int arrayShallowSize(T[] array) {
         // TODO implement
         return 0;
     }
 
-    public static int objectSize() {
-        return objectSize(new Object());
-    }
-
-    public static <T> int arraySize(T[] array) {
-        // TODO implement
-        return 0;
-    }
-
-    public static int arraySize(Object array) {
+    public static int arrayShallowSize(Object array) {
         // TODO implement
         return 0;
     }
