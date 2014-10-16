@@ -7,16 +7,18 @@ public class Main {
 
         JvmUtils.printAll();
 
-        System.out.println(SizeOf.sizeOf((byte)1));
-        System.out.println(SizeOf.sizeOf(false));
-        System.out.println(SizeOf.sizeOf((short) 2));
-        System.out.println(SizeOf.sizeOf((char)3));
-        System.out.println(SizeOf.sizeOf(3));
-        System.out.println(SizeOf.sizeOf(3.0F));
-        System.out.println(SizeOf.sizeOf(100L));
-        System.out.println(SizeOf.sizeOf(4.0D));
+        System.out.println(SizeOf.byteSize());
+        System.out.println(SizeOf.booleanSize());
+        System.out.println(SizeOf.shortSize());
+        System.out.println(SizeOf.charSize());
+        System.out.println(SizeOf.intSize());
+        System.out.println(SizeOf.floatSize());
+        System.out.println(SizeOf.longSize());
+        System.out.println(SizeOf.doubleSize());
+        System.out.println(SizeOf.objectSize());
 
-        System.out.println(SizeOf.sizeOf(new Object()));
+        System.out.println(SizeOf.objectSize(new Object()));
+        System.out.println(SizeOf.arraySize(new Integer[] { 1 } ));
     }
 
 }

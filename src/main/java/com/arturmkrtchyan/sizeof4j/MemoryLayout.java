@@ -1,15 +1,15 @@
 package com.arturmkrtchyan.sizeof4j;
 
-public abstract class MemoryLayout {
+public interface MemoryLayout {
 
-    public abstract int arrayHeaderSize();
+    int arrayHeaderSize();
 
-    public abstract int objectHeaderSize();
+    int objectHeaderSize();
 
-    public abstract int objectPadding();
+    int objectPadding();
 
-    public abstract int referenceSize();
+    int referenceSize();
 
-    public abstract int superClassFieldPadding();
+    int superClassFieldPadding();
 
 }

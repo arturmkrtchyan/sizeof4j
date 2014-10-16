@@ -1,14 +1,19 @@
 package com.arturmkrtchyan.sizeof4j;
 
 
+import sun.misc.Unsafe;
+
 import java.lang.management.ManagementFactory;
 import java.lang.management.MemoryPoolMXBean;
+import java.lang.reflect.Field;
 import java.text.DecimalFormat;
 
 public class JvmUtils {
 
     private static final String ARCH_32 = "32";
     private static final String ARCH_64 = "64";
+
+    private static Unsafe unsafe;
 
     private JvmUtils() {}
 
@@ -117,6 +122,19 @@ public class JvmUtils {
         return memory;
     }
 
+    public static synchronized Unsafe unsafe() {
+        if(unsafe == null) {
+            try {
+                Field field = Unsafe.class.getDeclaredField("theUnsafe");
+                field.setAccessible(true);
+                unsafe = (Unsafe) field.get(null);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return unsafe;
+    }
+
     public static MemoryLayout memoryLayout() {
         final String vmArch = vmArch();
 
@@ -206,20 +224,16 @@ public class JvmUtils {
 
 
     private static String printableBytes(long size) {
-        long Kb = 1  * 1024;
-        long Mb = Kb * 1024;
-        long Gb = Mb * 1024;
-        long Tb = Gb * 1024;
-        long Pb = Tb * 1024;
-        long Eb = Pb * 1024;
+        long K = 1  * 1024;
+        long M = K * 1024;
+        long G = M * 1024;
+        long T = G * 1024;
 
-        if (size <  Kb)                 return format(size) + " byte";
-        if (size >= Kb && size < Mb)    return format((double) size / Kb) + " Kb";
-        if (size >= Mb && size < Gb)    return format((double) size / Mb) + " Mb";
-        if (size >= Gb && size < Tb)    return format((double) size / Gb) + " Gb";
-        if (size >= Tb && size < Pb)    return format((double) size / Tb) + " Tb";
-        if (size >= Pb && size < Eb)    return format((double) size / Pb) + " Pb";
-        if (size >= Eb)                 return format((double) size / Eb) + " Eb";
+        if (size <  K)                return format(size) + " Byte";
+        if (size >= K && size < M)    return format((double) size / K) + " KB";
+        if (size >= M && size < G)    return format((double) size / M) + " MB";
+        if (size >= G && size < T)    return format((double) size / G) + " GB";
+        if (size >= T)                return format((double) size / T) + " TB";
 
         return "";
     }

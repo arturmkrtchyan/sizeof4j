@@ -3,43 +3,55 @@ package com.arturmkrtchyan.sizeof4j;
 
 public class SizeOf {
 
-    public static int sizeOf(Object obj) {
-        if(obj.getClass().isPrimitive()) {
-            return Primitive.get(obj.getClass()).size();
-        }
-        return 0;
-    }
-
-    public static int sizeOf(boolean value) {
+    public static int booleanSize() {
         return Primitive._boolean.size();
     }
 
-    public static int sizeOf(byte value) {
+    public static int byteSize() {
         return Primitive._byte.size();
     }
 
-    public static int sizeOf(char value) {
+    public static int charSize() {
         return Primitive._char.size();
     }
 
-    public static int sizeOf(short value) {
+    public static int shortSize() {
         return Primitive._short.size();
     }
 
-    public static int sizeOf(int value) {
+    public static int intSize() {
         return Primitive._int.size();
     }
 
-    public static int sizeOf(float value) {
+    public static int floatSize() {
         return Primitive._float.size();
     }
 
-    public static int sizeOf(long value) {
+    public static int longSize() {
         return Primitive._long.size();
     }
 
-    public static int sizeOf(double value) {
+    public static int doubleSize() {
         return Primitive._double.size();
+    }
+
+    public static int objectSize(Object object) {
+        // TODO implement
+        return 0;
+    }
+
+    public static int objectSize() {
+        return objectSize(new Object());
+    }
+
+    public static <T> int arraySize(T[] array) {
+        // TODO implement
+        return 0;
+    }
+
+    public static int arraySize(Object array) {
+        // TODO implement
+        return 0;
     }
 
 }
