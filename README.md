@@ -43,7 +43,7 @@ public class Main {
 
     private static class C {
         private int i;
-        private java.util.concurrent.ConcurrentHashMap chm = new java.util.concurrent.ConcurrentHashMap();
+        private java.util.HashMap hm = new java.util.HashMap();
     }
 
 }
