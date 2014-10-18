@@ -1,4 +1,4 @@
-package com.arturmkrtchyan.sizeof4j;
+package com.arturmkrtchyan.sizeof4j.layout;
 
 public interface MemoryLayout {
 

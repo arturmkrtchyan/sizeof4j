@@ -1,6 +1,10 @@
 package com.arturmkrtchyan.sizeof4j;
 
 
+import com.arturmkrtchyan.sizeof4j.layout.MemoryLayout;
+import com.arturmkrtchyan.sizeof4j.layout.MemoryLayout32;
+import com.arturmkrtchyan.sizeof4j.layout.MemoryLayout64;
+import com.arturmkrtchyan.sizeof4j.layout.MemoryLayoutCOOPs;
 import sun.misc.Unsafe;
 
 import java.lang.management.ManagementFactory;
@@ -141,86 +145,14 @@ public class JvmUtil {
         final String vmArch = vmArch();
 
         if(ARCH_32.equals(vmArch)) {
-            return memoryLayout32();
+            return new MemoryLayout32();
         } else if(ARCH_64.equals(vmArch)) {
             if(maxMemory() < HEAP_30GB) {
-                return memoryLayoutCompressedOOPs();
+                return new MemoryLayoutCOOPs();
             }
-            return memoryLayout64();
+            return new MemoryLayout64();
         }
         return null;
-    }
-
-    private static MemoryLayout memoryLayout32() {
-        return new MemoryLayout() {
-            @Override public int arrayHeaderSize() {
-                return 12;
-            }
-
-            @Override public int objectHeaderSize() {
-                return 8;
-            }
-
-            @Override public int objectPadding() {
-                return 8;
-            }
-
-            @Override public int referenceSize() {
-                return 4;
-            }
-
-            @Override public int superClassFieldPadding() {
-                return 4;
-            }
-        };
-    }
-
-    private static MemoryLayout memoryLayout64() {
-        return new MemoryLayout() {
-            @Override public int arrayHeaderSize() {
-                return 24;
-            }
-
-            @Override public int objectHeaderSize() {
-                return 16;
-            }
-
-            @Override public int objectPadding() {
-                return 8;
-            }
-
-            @Override public int referenceSize() {
-                return 8;
-            }
-
-            @Override public int superClassFieldPadding() {
-                return 8;
-            }
-        };
-    }
-
-    private static MemoryLayout memoryLayoutCompressedOOPs() {
-        return new MemoryLayout() {
-            @Override public int arrayHeaderSize() {
-                return 16;
-            }
-
-            @Override public int objectHeaderSize() {
-                return 12;
-            }
-
-            @Override public int objectPadding() {
-                return 8;
-            }
-
-            @Override public int referenceSize() {
-                return 4;
-            }
-
-            @Override public int superClassFieldPadding() {
-                return 4;
-            }
-        };
     }
 
     public static void printAll() {
