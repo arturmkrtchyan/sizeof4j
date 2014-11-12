@@ -1,6 +1,8 @@
 sizeof4j
 ========
 
+[![Build Status](https://api.travis-ci.org/repositories/arturmkrtchyan/sizeof4j.png)](https://travis-ci.org/arturmkrtchyan/sizeof4j)
+
 A Java library for measuring memory size of Java objects.
 
 ```java
