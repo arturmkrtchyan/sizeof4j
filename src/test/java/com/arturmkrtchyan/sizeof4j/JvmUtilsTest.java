@@ -1,5 +1,6 @@
 package com.arturmkrtchyan.sizeof4j;
 
+import com.arturmkrtchyan.sizeof4j.util.JvmUtil;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

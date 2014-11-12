@@ -1,4 +1,4 @@
-package com.arturmkrtchyan.sizeof4j;
+package com.arturmkrtchyan.sizeof4j.util;
 
 
 import com.arturmkrtchyan.sizeof4j.layout.MemoryLayout;
@@ -126,6 +126,11 @@ public class JvmUtil {
             memory += mp.getUsage().getMax();
         }
         return memory;
+    }
+
+    public static String processId() {
+        String runtimeName = ManagementFactory.getRuntimeMXBean().getName();
+        return runtimeName.split("@")[0];
     }
 
     public static synchronized Unsafe unsafe() {
