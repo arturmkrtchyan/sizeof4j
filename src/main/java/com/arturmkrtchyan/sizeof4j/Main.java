@@ -2,7 +2,7 @@ package com.arturmkrtchyan.sizeof4j;
 
 import com.arturmkrtchyan.sizeof4j.util.JvmUtil;
 
-public class Main {
+class Main {
 
     public static void main(String[] args) {
 
