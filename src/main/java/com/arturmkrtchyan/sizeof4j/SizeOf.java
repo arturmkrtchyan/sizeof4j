@@ -41,23 +41,18 @@ public class SizeOf {
         return Primitive._double.size();
     }
 
-    public static int objectShallowSize(Object object) {
-        return objectShallowSize(object.getClass());
+    public static <T> int shallowSize(T[] array) {
+        return shallowSize(array.getClass());
     }
 
-    public static int objectShallowSize() {
-        return objectShallowSize(new Object());
+    public static <T> int shallowSize(T object) {
+        return shallowSize(object.getClass());
     }
 
-    public static <T> int arrayShallowSize(T[] array) {
-        return objectShallowSize(array.getClass());
-    }
-
-    public static int arrayShallowSize(Object array) {
-        return objectShallowSize(array.getClass());
-    }
-
-    public static <T> int objectShallowSize(Class<T> clazz) {
+    public static <T> int shallowSize(Class<T> clazz) {
+        if(clazz.isPrimitive()) {
+            return Primitive.get(clazz).size();
+        }
         return calculator.calculateShallow(clazz);
     }
 

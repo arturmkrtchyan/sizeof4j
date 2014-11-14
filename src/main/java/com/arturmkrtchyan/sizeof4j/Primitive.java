@@ -1,7 +1,7 @@
 package com.arturmkrtchyan.sizeof4j;
 
 
-public enum Primitive {
+enum Primitive {
 
     _boolean(1, boolean.class),
     _byte(1, byte.class),

@@ -6,6 +6,8 @@ class Main {
 
     public static void main(String[] args) {
 
+        System.out.println(int.class.getName());
+
         JvmUtil.printAll();
 
         System.out.println("\n\nSizeOf");
@@ -20,16 +22,18 @@ class Main {
         System.out.println("double:     " + SizeOf.doubleSize());
 
         System.out.println("--------------------------");
-        System.out.println("Object:     " + SizeOf.objectShallowSize(Object.class));
-        System.out.println("Integer:    " + SizeOf.objectShallowSize(new Integer(2)));
-        System.out.println("String:     " + SizeOf.objectShallowSize(new String("aaa")));
+        System.out.println("A:          " + SizeOf.shallowSize(int[].class));
+        System.out.println("Object:     " + SizeOf.shallowSize(Object.class));
+        System.out.println("Integer:    " + SizeOf.shallowSize(new Integer(2)));
+        System.out.println("String:     " + SizeOf.shallowSize(new String("aaa")));
 
         System.out.println("--------------------------");
-        System.out.println("A:          " + SizeOf.objectShallowSize(new A()));
-        System.out.println("B:          " + SizeOf.objectShallowSize(new B()));
-        System.out.println("C:          " + SizeOf.objectShallowSize(new C()));
-        System.out.println("C[4]:       " + SizeOf.objectShallowSize(
-                new C[]{ new C(), new C(), new C(), new C()})
+        System.out.println("A:          " + SizeOf.shallowSize(int.class));
+        System.out.println("A:          " + SizeOf.shallowSize(new A()));
+        System.out.println("B:          " + SizeOf.shallowSize(new B()));
+        System.out.println("C:          " + SizeOf.shallowSize(new C()));
+        System.out.println("C[4]:       " + SizeOf.shallowSize(
+                        new C[]{new C(), new C(), new C(), new C()})
         );
     }
 
