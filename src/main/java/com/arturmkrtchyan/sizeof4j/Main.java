@@ -20,7 +20,7 @@ public class Main {
         System.out.println("double:     " + SizeOf.doubleSize());
 
         System.out.println("--------------------------");
-        System.out.println("Object:     " + SizeOf.objectShallowSize(new Object()));
+        System.out.println("Object:     " + SizeOf.objectShallowSize(Object.class));
         System.out.println("Integer:    " + SizeOf.objectShallowSize(new Integer(2)));
         System.out.println("String:     " + SizeOf.objectShallowSize(new String("aaa")));
 
@@ -28,6 +28,9 @@ public class Main {
         System.out.println("A:          " + SizeOf.objectShallowSize(new A()));
         System.out.println("B:          " + SizeOf.objectShallowSize(new B()));
         System.out.println("C:          " + SizeOf.objectShallowSize(new C()));
+        System.out.println("C[4]:       " + SizeOf.objectShallowSize(
+                new C[]{ new C(), new C(), new C(), new C()})
+        );
     }
 
     private static class A {

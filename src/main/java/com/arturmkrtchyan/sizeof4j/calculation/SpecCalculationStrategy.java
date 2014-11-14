@@ -14,22 +14,17 @@ public class SpecCalculationStrategy implements CalculationStrategy {
     private MemoryLayout memoryLayout = JvmUtil.memoryLayout();
 
     @Override
-    public int calculateShallow(final Object obj) {
-        final Class<?> type = obj.getClass();
-        if (type.isArray()) {
+    public <T> int calculateShallow(Class<T> clazz) {
+        if (clazz.isArray()) {
             return 0;
         }
-        return calculateShallow(type);
-    }
-
-    protected int calculateShallow(Class<?> type) {
-        int size = memoryLayout.objectHeaderSize() + calculateDeclaredFields(type);
+        int size = memoryLayout.objectHeaderSize() + calculateDeclaredFields(clazz);
         return roundToMultiple(size, memoryLayout.objectPadding());
     }
 
-    private int calculateDeclaredFields(Class<?> type) {
+    private <T> int calculateDeclaredFields(Class<T> clazz) {
         int size = 0;
-        for (Field f : fieldsOf(type)) {
+        for (Field f : fieldsOf(clazz)) {
             if(f.getType().isPrimitive()) {
                 size += Primitive.get(f.getType()).size();
             } else {

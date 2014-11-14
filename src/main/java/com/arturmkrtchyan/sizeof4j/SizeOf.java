@@ -2,11 +2,12 @@ package com.arturmkrtchyan.sizeof4j;
 
 
 import com.arturmkrtchyan.sizeof4j.calculation.CalculationStrategy;
-import com.arturmkrtchyan.sizeof4j.calculation.SpecCalculationStrategy;
+import com.arturmkrtchyan.sizeof4j.calculation.hotspot.HistogramCalculationStrategy;
 
 public class SizeOf {
 
-    static CalculationStrategy calculator = new SpecCalculationStrategy();
+
+    private static final CalculationStrategy calculator = new HistogramCalculationStrategy();
 
     public static int booleanSize() {
         return Primitive._boolean.size();
@@ -41,7 +42,7 @@ public class SizeOf {
     }
 
     public static int objectShallowSize(Object object) {
-        return calculator.calculateShallow(object);
+        return objectShallowSize(object.getClass());
     }
 
     public static int objectShallowSize() {
@@ -49,13 +50,15 @@ public class SizeOf {
     }
 
     public static <T> int arrayShallowSize(T[] array) {
-        // TODO implement
-        return 0;
+        return objectShallowSize(array.getClass());
     }
 
     public static int arrayShallowSize(Object array) {
-        // TODO implement
-        return 0;
+        return objectShallowSize(array.getClass());
+    }
+
+    public static <T> int objectShallowSize(Class<T> clazz) {
+        return calculator.calculateShallow(clazz);
     }
 
 }

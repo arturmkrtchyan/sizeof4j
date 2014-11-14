@@ -3,8 +3,7 @@ package com.arturmkrtchyan.sizeof4j.calculation;
 public class UnsafeCalculationStrategy implements CalculationStrategy {
 
     @Override
-    public int calculateShallow(final Object obj) {
+    public <T> int calculateShallow(Class<T> clazz) {
         return 0;
     }
-
 }

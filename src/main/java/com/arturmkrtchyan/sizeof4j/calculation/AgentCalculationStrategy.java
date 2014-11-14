@@ -1,8 +1,9 @@
 package com.arturmkrtchyan.sizeof4j.calculation;
 
 public class AgentCalculationStrategy implements CalculationStrategy {
+
     @Override
-    public int calculateShallow(Object obj) {
+    public <T> int calculateShallow(Class<T> clazz) {
         return 0;
     }
 }
