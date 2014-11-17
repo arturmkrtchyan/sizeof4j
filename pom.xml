@@ -8,6 +8,31 @@
     <artifactId>sizeof4j</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+    <licenses>
+        <license>
+            <name>Apache License 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <name>sizeof4j</name>
+    <description>A Java library for measuring memory size of Java objects.</description>
+    <url>https://github.com/arturmkrtchyan/sizeof4j</url>
+
+    <developers>
+        <developer>
+            <name>Artur Mkrtchyan</name>
+        </developer>
+    </developers>
+
+
+    <parent>
+        <groupId>org.sonatype.oss</groupId>
+        <artifactId>oss-parent</artifactId>
+        <version>7</version>
+    </parent>
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <jdkVersion>1.7</jdkVersion>
