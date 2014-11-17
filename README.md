@@ -51,3 +51,6 @@ class Main {
 
 }
 ```
+
+![Compatibility Badge](https://java.net/downloads/adoptopenjdk/compat.svg)
+
