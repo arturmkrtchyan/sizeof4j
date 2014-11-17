@@ -1,7 +1,7 @@
 sizeof4j
 ========
 
-[![Build Status](https://api.travis-ci.org/repositories/arturmkrtchyan/sizeof4j.png)](https://travis-ci.org/arturmkrtchyan/sizeof4j) [![License](http://img.shields.io/:license-Apache 2.0-blue.svg)](https://raw.githubusercontent.com/arturmkrtchyan/iban4j/master/LICENSE.txt
+[![Build Status](https://api.travis-ci.org/repositories/arturmkrtchyan/sizeof4j.png)](https://travis-ci.org/arturmkrtchyan/sizeof4j) [![License](http://img.shields.io/:license-Apache 2.0-blue.svg)](https://raw.githubusercontent.com/arturmkrtchyan/iban4j/master/LICENSE.txt)
 
 A Java library for measuring memory size of Java objects.
 
