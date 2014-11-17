@@ -1,7 +1,7 @@
 package com.arturmkrtchyan.sizeof4j;
 
 
-enum Primitive {
+public enum Primitive {
 
     _boolean(1, boolean.class),
     _byte(1, byte.class),
@@ -28,7 +28,7 @@ enum Primitive {
         return type;
     }
 
-    public static Primitive get(Class<?> type) {
+    public static Primitive get(final Class<?> type) {
         for(Primitive primitive : values()) {
             if(type == primitive.type) {
                 return primitive;

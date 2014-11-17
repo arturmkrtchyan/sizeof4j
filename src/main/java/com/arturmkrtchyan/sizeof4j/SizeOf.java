@@ -7,7 +7,9 @@ import com.arturmkrtchyan.sizeof4j.calculation.hotspot.HistogramCalculationStrat
 public class SizeOf {
 
 
-    private static final CalculationStrategy calculator = new HistogramCalculationStrategy();
+    private static final CalculationStrategy histoCalculator = new HistogramCalculationStrategy();
+
+    private static final CalculationStrategy specCalculator = new HistogramCalculationStrategy();
 
     public static int booleanSize() {
         return Primitive._boolean.size();
@@ -41,19 +43,19 @@ public class SizeOf {
         return Primitive._double.size();
     }
 
-    public static <T> int shallowSize(T[] array) {
+    public static <T> int shallowSize(final T[] array) {
         return shallowSize(array.getClass());
     }
 
-    public static <T> int shallowSize(T object) {
+    public static <T> int shallowSize(final T object) {
         return shallowSize(object.getClass());
     }
 
-    public static <T> int shallowSize(Class<T> clazz) {
+    public static <T> int shallowSize(final Class<T> clazz) {
         if(clazz.isPrimitive()) {
             return Primitive.get(clazz).size();
         }
-        return calculator.calculateShallow(clazz);
+        return histoCalculator.calculateShallow(clazz);
     }
 
 }

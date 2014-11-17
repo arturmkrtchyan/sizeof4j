@@ -27,8 +27,8 @@ public class HotSpotHistogram {
         try {
             vm = VirtualMachine.attach(processId);
 
-            InputStream in = ((HotSpotVirtualMachine)vm).heapHisto();
-            String histo = IOUtil.read(in);
+            final InputStream in = ((HotSpotVirtualMachine)vm).heapHisto();
+            final String histo = IOUtil.read(in);
 
             return parse(histo);
 

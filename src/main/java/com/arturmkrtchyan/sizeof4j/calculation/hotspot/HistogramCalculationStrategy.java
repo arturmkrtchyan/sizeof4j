@@ -7,9 +7,9 @@ import java.util.Map;
 public class HistogramCalculationStrategy implements CalculationStrategy {
 
     @Override
-    public <T> int calculateShallow(Class<T> clazz) {
-        Map<String, HistogramEntry> entries = HotSpotHistogram.heapHistogram();
-        HistogramEntry entry = entries.get(clazz.getName());
+    public <T> int calculateShallow(final Class<T> clazz) {
+        final Map<String, HistogramEntry> entries = HotSpotHistogram.heapHistogram();
+        final HistogramEntry entry = entries.get(clazz.getName());
 
         if(entry == null) {
             // FIXME object doesn't exist in heap
