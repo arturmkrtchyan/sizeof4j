@@ -3,13 +3,14 @@ package com.arturmkrtchyan.sizeof4j;
 
 import com.arturmkrtchyan.sizeof4j.calculation.CalculationStrategy;
 import com.arturmkrtchyan.sizeof4j.calculation.hotspot.HistogramCalculationStrategy;
+import com.arturmkrtchyan.sizeof4j.layout.MemoryLayout;
+import com.arturmkrtchyan.sizeof4j.util.JvmUtil;
+import com.arturmkrtchyan.sizeof4j.util.ReflectionUtil;
 
 public class SizeOf {
 
 
     private static final CalculationStrategy histoCalculator = new HistogramCalculationStrategy();
-
-    private static final CalculationStrategy specCalculator = new HistogramCalculationStrategy();
 
     public static int booleanSize() {
         return Primitive._boolean.size();
@@ -44,16 +45,21 @@ public class SizeOf {
     }
 
     public static <T> int shallowSize(final T[] array) {
-        return shallowSize(array.getClass());
+        return histoCalculator.calculateShallow(array);
     }
 
     public static <T> int shallowSize(final T object) {
+        if(ReflectionUtil.isPrimitiveArray(object)) {
+            return 0; // FIXME
+        }
         return shallowSize(object.getClass());
     }
 
     public static <T> int shallowSize(final Class<T> clazz) {
         if(clazz.isPrimitive()) {
             return Primitive.get(clazz).size();
+        } else if(clazz.isArray()) {
+            return histoCalculator.calculateArrayShallow(clazz);
         }
         return histoCalculator.calculateShallow(clazz);
     }

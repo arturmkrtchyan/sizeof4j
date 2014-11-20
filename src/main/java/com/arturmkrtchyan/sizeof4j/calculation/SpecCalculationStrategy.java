@@ -9,9 +9,7 @@ import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SpecCalculationStrategy implements CalculationStrategy {
-
-    private static final MemoryLayout memoryLayout = JvmUtil.memoryLayout();
+public class SpecCalculationStrategy extends BaseCalculationStrategy {
 
     @Override
     public <T> int calculateShallow(final Class<T> clazz) {
@@ -43,10 +41,6 @@ public class SpecCalculationStrategy implements CalculationStrategy {
             }
         }
         return fields;
-    }
-
-    private int roundToMultiple(int value, int multiple) {
-        return ((value + multiple - 1) / multiple) * multiple;
     }
 
 }
