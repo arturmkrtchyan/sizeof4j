@@ -2,6 +2,7 @@ package com.arturmkrtchyan.sizeof4j.util;
 
 import com.arturmkrtchyan.sizeof4j.Primitive;
 
+import java.lang.reflect.Array;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
@@ -19,6 +20,10 @@ public class ReflectionUtil {
     public static <T> boolean isPrimitiveArray(final T object) {
         return object.getClass().isArray() &&
                 object.getClass().getComponentType().isPrimitive();
+    }
+
+    public static <T> int getArrayLength(final T object) {
+        return Array.getLength(object);
     }
 
     @SuppressWarnings("unchecked")

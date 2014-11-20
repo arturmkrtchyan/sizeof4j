@@ -45,12 +45,13 @@ public class SizeOf {
     }
 
     public static <T> int shallowSize(final T[] array) {
-        return histoCalculator.calculateShallow(array);
+        return histoCalculator.calculateShallow(array.getClass(), array.length);
     }
 
     public static <T> int shallowSize(final T object) {
         if(ReflectionUtil.isPrimitiveArray(object)) {
-            return 0; // FIXME
+            return histoCalculator.calculateShallow(object.getClass(),
+                    ReflectionUtil.getArrayLength(object));
         }
         return shallowSize(object.getClass());
     }
@@ -59,7 +60,7 @@ public class SizeOf {
         if(clazz.isPrimitive()) {
             return Primitive.get(clazz).size();
         } else if(clazz.isArray()) {
-            return histoCalculator.calculateArrayShallow(clazz);
+            return histoCalculator.calculateShallow(clazz, 0);
         }
         return histoCalculator.calculateShallow(clazz);
     }

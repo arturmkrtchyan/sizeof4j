@@ -8,28 +8,21 @@ public abstract class BaseCalculationStrategy implements CalculationStrategy {
 
     protected static final MemoryLayout memoryLayout = JvmUtil.memoryLayout();
 
-    protected int roundToMultiple(int value, int multiple) {
+    protected int roundToMultiple(final int value, final int multiple) {
         return ((value + multiple - 1) / multiple) * multiple;
     }
 
     @Override
-    public <T> int calculateShallow(final T[] array) {
-        Class arrayType = array.getClass().getComponentType();
+    public <T> int calculateShallow(final Class<T> clazz, final int length) {
+        Class arrayType = clazz.getComponentType();
 
         int size = memoryLayout.arrayHeaderSize();
         if(arrayType.isPrimitive()) {
-            size += array.length * Primitive.get(arrayType).size();
+            size += length * Primitive.get(arrayType).size();
         } else {
-            size += array.length * memoryLayout.referenceSize();
+            size += length * memoryLayout.referenceSize();
         }
-        // FIXME padding
-        return size;
-    }
-
-    @Override
-    public <T> int calculateArrayShallow(final Class<T> clazz) {
-        final int arrayHeaderSize = memoryLayout.arrayHeaderSize();
-        return roundToMultiple(arrayHeaderSize, memoryLayout.objectPadding());
+        return roundToMultiple(size, memoryLayout.objectPadding());
     }
 
 }
