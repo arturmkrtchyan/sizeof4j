@@ -77,6 +77,43 @@ public class SizeOfTest {
         }
     }
 
+    @Test
+    public void emptyIntArrayShallowSize() {
+        switch (memoryLayout) {
+            case Layout32:
+                assertEquals("int[] size must be 16", 16,
+                        SizeOf.shallowSize(int[].class));
+                break;
+            case Layout64 :
+                assertEquals("int[] size must be 24", 24,
+                        SizeOf.shallowSize(int[].class));
+                break;
+            case LayoutCoops:
+                assertEquals("int[] size must be 16", 16,
+                        SizeOf.shallowSize(int[].class));
+                break;
+        }
+    }
+
+    @Test
+    public void stringArrayShallowSize() {
+        final String[] testObj = new String[] {"Hello", "World"};
+        switch (memoryLayout) {
+            case Layout32:
+                assertEquals("String[2] size must be 24", 24,
+                        SizeOf.shallowSize(testObj));
+                break;
+            case Layout64 :
+                assertEquals("String[2] size must be 40", 40,
+                        SizeOf.shallowSize(testObj));
+                break;
+            case LayoutCoops:
+                assertEquals("String[2] size must be 24", 24,
+                        SizeOf.shallowSize(testObj));
+                break;
+        }
+    }
+
 
 
 }
