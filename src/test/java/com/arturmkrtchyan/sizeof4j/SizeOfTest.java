@@ -1,10 +1,13 @@
 package com.arturmkrtchyan.sizeof4j;
 
+import com.arturmkrtchyan.sizeof4j.util.JvmUtil;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
 public class SizeOfTest {
+
+    MemoryLayout memoryLayout = JvmUtil.memoryLayout();
 
     @Test
     public void primitives() {
@@ -20,7 +23,58 @@ public class SizeOfTest {
 
     @Test
     public void objectShallowSize() {
-        assertEquals("Object size must be 16", 16, SizeOf.shallowSize(new Object()));
+        final Object testObj = new Object();
+        switch (memoryLayout) {
+            case Layout32:
+                assertEquals("Object size must be 8", 8,
+                        SizeOf.shallowSize(testObj));
+                break;
+            case Layout64 :
+                assertEquals("Object size must be 16", 16,
+                        SizeOf.shallowSize(testObj));
+                break;
+            case LayoutCoops:
+                assertEquals("Object size must be 16", 16,
+                        SizeOf.shallowSize(testObj));
+                break;
+        }
+    }
+
+    @Test
+    public void integerShallowSize() {
+        final Integer testObj = new Integer(12);
+        switch (memoryLayout) {
+            case Layout32:
+                assertEquals("Integer size must be 16", 16,
+                        SizeOf.shallowSize(testObj));
+                break;
+            case Layout64 :
+                assertEquals("Integer size must be 24", 24,
+                        SizeOf.shallowSize(testObj));
+                break;
+            case LayoutCoops:
+                assertEquals("Integer size must be 16", 16,
+                        SizeOf.shallowSize(testObj));
+                break;
+        }
+    }
+
+    @Test
+    public void stringShallowSize() {
+        switch (memoryLayout) {
+            case Layout32:
+                assertEquals("String size must be 16", 16,
+                        SizeOf.shallowSize(String.class));
+                break;
+            case Layout64 :
+                assertEquals("String size must be 32", 32,
+                        SizeOf.shallowSize(String.class));
+                break;
+            case LayoutCoops:
+                assertEquals("String size must be 24", 24,
+                        SizeOf.shallowSize(String.class));
+                break;
+        }
     }
 
 

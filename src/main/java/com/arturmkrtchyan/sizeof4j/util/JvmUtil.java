@@ -6,8 +6,10 @@ import sun.misc.Unsafe;
 
 import java.lang.management.ManagementFactory;
 import java.lang.management.MemoryPoolMXBean;
+import java.lang.management.RuntimeMXBean;
 import java.lang.reflect.Field;
 import java.text.DecimalFormat;
+import java.util.List;
 
 public class JvmUtil {
 
@@ -149,12 +151,27 @@ public class JvmUtil {
         if(ARCH_32.equals(vmArch)) {
             return MemoryLayout.Layout32;
         } else if(ARCH_64.equals(vmArch)) {
-            if(maxMemory() < HEAP_30GB) {
+            if(maxMemory() < HEAP_30GB && !isCompressedOopsDisabled()) {
                 return MemoryLayout.LayoutCoops;
             }
             return MemoryLayout.Layout64;
         }
         return null;
+    }
+
+    public static List<String> getInputArguments() {
+        RuntimeMXBean bean = ManagementFactory.getRuntimeMXBean();
+        return bean.getInputArguments();
+    }
+
+    private static boolean isCompressedOopsDisabled() {
+        List<String> arguments = getInputArguments();
+        for(String argument : arguments) {
+            if(argument.equals("-XX:-UseCompressedOops")) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public static void printAll() {
