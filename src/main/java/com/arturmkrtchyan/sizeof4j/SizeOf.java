@@ -3,8 +3,6 @@ package com.arturmkrtchyan.sizeof4j;
 
 import com.arturmkrtchyan.sizeof4j.calculation.CalculationStrategy;
 import com.arturmkrtchyan.sizeof4j.calculation.hotspot.HistogramCalculationStrategy;
-import com.arturmkrtchyan.sizeof4j.layout.MemoryLayout;
-import com.arturmkrtchyan.sizeof4j.util.JvmUtil;
 import com.arturmkrtchyan.sizeof4j.util.ReflectionUtil;
 
 public class SizeOf {

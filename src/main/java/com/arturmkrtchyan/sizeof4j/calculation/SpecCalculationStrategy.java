@@ -1,7 +1,5 @@
 package com.arturmkrtchyan.sizeof4j.calculation;
 
-import com.arturmkrtchyan.sizeof4j.util.JvmUtil;
-import com.arturmkrtchyan.sizeof4j.layout.MemoryLayout;
 import com.arturmkrtchyan.sizeof4j.Primitive;
 
 import java.lang.reflect.Field;

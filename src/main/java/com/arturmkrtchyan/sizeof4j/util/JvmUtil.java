@@ -1,10 +1,7 @@
 package com.arturmkrtchyan.sizeof4j.util;
 
 
-import com.arturmkrtchyan.sizeof4j.layout.MemoryLayout;
-import com.arturmkrtchyan.sizeof4j.layout.MemoryLayout32;
-import com.arturmkrtchyan.sizeof4j.layout.MemoryLayout64;
-import com.arturmkrtchyan.sizeof4j.layout.MemoryLayoutCOOPs;
+import com.arturmkrtchyan.sizeof4j.MemoryLayout;
 import sun.misc.Unsafe;
 
 import java.lang.management.ManagementFactory;
@@ -150,12 +147,12 @@ public class JvmUtil {
         final String vmArch = vmArch();
 
         if(ARCH_32.equals(vmArch)) {
-            return new MemoryLayout32();
+            return MemoryLayout.Layout32;
         } else if(ARCH_64.equals(vmArch)) {
             if(maxMemory() < HEAP_30GB) {
-                return new MemoryLayoutCOOPs();
+                return MemoryLayout.LayoutCoops;
             }
-            return new MemoryLayout64();
+            return MemoryLayout.Layout64;
         }
         return null;
     }

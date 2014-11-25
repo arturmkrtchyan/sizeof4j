@@ -1,7 +1,7 @@
 package com.arturmkrtchyan.sizeof4j.calculation;
 
+import com.arturmkrtchyan.sizeof4j.MemoryLayout;
 import com.arturmkrtchyan.sizeof4j.Primitive;
-import com.arturmkrtchyan.sizeof4j.layout.MemoryLayout;
 import com.arturmkrtchyan.sizeof4j.util.JvmUtil;
 
 public abstract class BaseCalculationStrategy implements CalculationStrategy {

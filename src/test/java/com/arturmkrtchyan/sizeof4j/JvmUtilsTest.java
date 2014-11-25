@@ -8,19 +8,19 @@ import static org.junit.Assert.*;
 public class JvmUtilsTest {
 
     @Test
-    public void testVmName() throws Exception {
+    public void vmName() {
         assertNotNull(JvmUtil.vmName());
         assertNotEquals(JvmUtil.vmName(), "");
     }
 
     @Test
-    public void testVmVersion() throws Exception {
+    public void vmVersion() {
         assertNotNull(JvmUtil.vmVersion());
         assertNotEquals(JvmUtil.vmVersion(), "");
     }
 
     @Test
-    public void testUnsafe() throws Exception {
+    public void unsafe() {
         assertNotNull(JvmUtil.unsafe());
     }
 }
