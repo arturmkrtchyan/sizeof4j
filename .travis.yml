@@ -4,4 +4,4 @@ jdk:
   - oraclejdk7
   - oraclejdk8
 after_success:
-  - mvn -X clean test jacoco:report coveralls:report
+  - mvn clean test jacoco:report coveralls:report
