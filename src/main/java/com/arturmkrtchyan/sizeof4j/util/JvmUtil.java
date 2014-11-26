@@ -146,15 +146,17 @@ public class JvmUtil {
     }
 
     public static MemoryLayout memoryLayout() {
-        final String vmArch = vmArch();
+        return memoryLayout(vmArch());
+    }
 
+    public static MemoryLayout memoryLayout(final String vmArch) {
         if(ARCH_32.equals(vmArch)) {
             return MemoryLayout.Layout32;
         } else if(ARCH_64.equals(vmArch)) {
-            if(maxMemory() < HEAP_30GB && !isCompressedOopsDisabled()) {
-                return MemoryLayout.LayoutCoops;
+            if(maxMemory() > HEAP_30GB || isCompressedOopsDisabled()) {
+                return MemoryLayout.Layout64;
             }
-            return MemoryLayout.Layout64;
+            return MemoryLayout.LayoutCoops;
         }
         return null;
     }
@@ -165,9 +167,13 @@ public class JvmUtil {
     }
 
     private static boolean isCompressedOopsDisabled() {
+        return isOptionDisabled("-XX:-UseCompressedOops");
+    }
+
+    protected static boolean isOptionDisabled(final String option) {
         List<String> arguments = getInputArguments();
         for(String argument : arguments) {
-            if(argument.equals("-XX:-UseCompressedOops")) {
+            if(argument.equals(option)) {
                 return true;
             }
         }

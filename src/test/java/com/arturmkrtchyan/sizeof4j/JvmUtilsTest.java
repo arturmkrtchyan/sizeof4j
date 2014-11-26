@@ -88,4 +88,21 @@ public class JvmUtilsTest {
     public void memoryLayout() {
         assertNotNull(JvmUtil.memoryLayout());
     }
+
+    @Test
+    public void memoryLayoutFor32Bit() {
+        assertNotNull(JvmUtil.memoryLayout("32"));
+        assertEquals(MemoryLayout.Layout32, JvmUtil.memoryLayout("32"));
+    }
+
+    @Test
+    public void memoryLayoutFor64BitCoops() {
+        assertNotNull(JvmUtil.memoryLayout("64"));
+        assertEquals(MemoryLayout.LayoutCoops, JvmUtil.memoryLayout("64"));
+    }
+
+    @Test
+    public void memoryLayoutForUnknownArch() {
+        assertNull(JvmUtil.memoryLayout("128"));
+    }
 }
