@@ -132,7 +132,7 @@
                         </goals>
                         <configuration>
                             <excludes>
-                                <exclude>**/com/arturmkrtchyan/sizeof4j/Main.*</exclude>
+                                <exclude>**/com/arturmkrtchyan/sizeof4j/Main*</exclude>
                                 <exclude>**/com/arturmkrtchyan/sizeof4j/calculation/SpecCalculationStrategy.*</exclude>
                                 <exclude>**/com/arturmkrtchyan/sizeof4j/util/ConsoleUtil.*</exclude>
                             </excludes>

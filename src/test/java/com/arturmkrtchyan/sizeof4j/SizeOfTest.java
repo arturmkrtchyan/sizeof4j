@@ -22,6 +22,12 @@ public class SizeOfTest {
     }
 
     @Test
+    public void doubleShallowSize() {
+        assertEquals("double size must be 8", 8,
+                SizeOf.shallowSize(double.class));
+    }
+
+    @Test
     public void objectShallowSize() {
         final Object testObj = new Object();
         switch (memoryLayout) {
@@ -91,6 +97,24 @@ public class SizeOfTest {
             case LayoutCoops:
                 assertEquals("int[] size must be 16", 16,
                         SizeOf.shallowSize(int[].class));
+                break;
+        }
+    }
+
+    @Test
+    public void emptyFloatArrayShallowSize() {
+        switch (memoryLayout) {
+            case Layout32:
+                assertEquals("float[] size must be 16", 16,
+                        SizeOf.shallowSize(new float[] {}));
+                break;
+            case Layout64 :
+                assertEquals("float[] size must be 24", 24,
+                        SizeOf.shallowSize(new float[] {}));
+                break;
+            case LayoutCoops:
+                assertEquals("float[] size must be 16", 16,
+                        SizeOf.shallowSize(new float[] {}));
                 break;
         }
     }
