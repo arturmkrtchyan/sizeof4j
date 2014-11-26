@@ -1,6 +1,8 @@
-package com.arturmkrtchyan.sizeof4j;
+package com.arturmkrtchyan.sizeof4j.util;
 
+import com.arturmkrtchyan.sizeof4j.MemoryLayout;
 import com.arturmkrtchyan.sizeof4j.util.JvmUtil;
+import org.junit.Assert;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -92,7 +94,7 @@ public class JvmUtilsTest {
     @Test
     public void memoryLayoutFor32Bit() {
         assertNotNull(JvmUtil.memoryLayout("32"));
-        assertEquals(MemoryLayout.Layout32, JvmUtil.memoryLayout("32"));
+        Assert.assertEquals(MemoryLayout.Layout32, JvmUtil.memoryLayout("32"));
     }
 
     @Test
