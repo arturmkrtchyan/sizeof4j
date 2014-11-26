@@ -149,7 +149,7 @@ public class JvmUtil {
         return memoryLayout(vmArch());
     }
 
-    public static MemoryLayout memoryLayout(final String vmArch) {
+    protected static MemoryLayout memoryLayout(final String vmArch) {
         if(ARCH_32.equals(vmArch)) {
             return MemoryLayout.Layout32;
         } else if(ARCH_64.equals(vmArch)) {
@@ -167,10 +167,10 @@ public class JvmUtil {
     }
 
     private static boolean isCompressedOopsDisabled() {
-        return isOptionDisabled("-XX:-UseCompressedOops");
+        return isOptionPresent("-XX:-UseCompressedOops");
     }
 
-    protected static boolean isOptionDisabled(final String option) {
+    protected static boolean isOptionPresent(final String option) {
         List<String> arguments = getInputArguments();
         for(String argument : arguments) {
             if(argument.equals(option)) {
