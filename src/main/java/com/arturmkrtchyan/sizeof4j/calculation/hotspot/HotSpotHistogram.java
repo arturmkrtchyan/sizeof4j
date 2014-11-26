@@ -1,5 +1,6 @@
 package com.arturmkrtchyan.sizeof4j.calculation.hotspot;
 
+import com.arturmkrtchyan.sizeof4j.SizeOfException;
 import com.arturmkrtchyan.sizeof4j.util.IOUtil;
 import com.arturmkrtchyan.sizeof4j.util.JvmUtil;
 import com.sun.tools.attach.AttachNotSupportedException;
@@ -8,7 +9,6 @@ import sun.tools.attach.HotSpotVirtualMachine;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -33,7 +33,7 @@ public class HotSpotHistogram {
             return parse(histo);
 
         } catch (AttachNotSupportedException | IOException e) {
-            e.printStackTrace();
+            throw new SizeOfException(e);
         } finally {
             if(vm != null) {
                 try {
@@ -43,7 +43,6 @@ public class HotSpotHistogram {
                 }
             }
         }
-        return Collections.emptyMap();
     }
 
     protected static Map<String, HistogramEntry> parse(final String histogram) {

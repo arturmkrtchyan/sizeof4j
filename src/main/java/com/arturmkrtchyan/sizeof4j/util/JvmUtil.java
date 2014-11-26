@@ -2,13 +2,13 @@ package com.arturmkrtchyan.sizeof4j.util;
 
 
 import com.arturmkrtchyan.sizeof4j.MemoryLayout;
+import com.arturmkrtchyan.sizeof4j.SizeOfException;
 import sun.misc.Unsafe;
 
 import java.lang.management.ManagementFactory;
 import java.lang.management.MemoryPoolMXBean;
 import java.lang.management.RuntimeMXBean;
 import java.lang.reflect.Field;
-import java.text.DecimalFormat;
 import java.util.List;
 
 public class JvmUtil {
@@ -139,7 +139,7 @@ public class JvmUtil {
                 field.setAccessible(true);
                 unsafe = (Unsafe) field.get(null);
             } catch (Exception e) {
-                e.printStackTrace();
+                throw new SizeOfException(e);
             }
         }
         return unsafe;

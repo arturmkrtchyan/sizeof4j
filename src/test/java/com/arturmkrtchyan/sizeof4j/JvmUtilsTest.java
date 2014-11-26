@@ -79,6 +79,12 @@ public class JvmUtilsTest {
     }
 
     @Test
+    public void processId() {
+        assertNotNull(JvmUtil.processId());
+        assertNotEquals(JvmUtil.processId(), "");
+    }
+
+    @Test
     public void memoryLayout() {
         assertNotNull(JvmUtil.memoryLayout());
     }

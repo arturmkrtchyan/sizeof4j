@@ -1,6 +1,7 @@
 package com.arturmkrtchyan.sizeof4j.util;
 
 import com.arturmkrtchyan.sizeof4j.Primitive;
+import com.arturmkrtchyan.sizeof4j.SizeOfException;
 
 import java.lang.reflect.Array;
 import java.lang.reflect.Constructor;
@@ -38,17 +39,13 @@ public class ReflectionUtil {
         return constructors[0];
     }
 
-    static boolean hasParameters(final Constructor constructor) {
-        return constructor.getGenericParameterTypes().length != 0;
-    }
-
     static <T> T newInstance(final Constructor<T> constructor, final Object ... args) {
         try {
             return constructor.newInstance(args);
         } catch (InstantiationException |
                 IllegalAccessException |
                 InvocationTargetException e) {
-            throw new RuntimeException(e);
+            throw new SizeOfException(e);
         }
     }
 
