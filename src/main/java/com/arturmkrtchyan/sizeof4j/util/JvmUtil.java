@@ -174,52 +174,6 @@ public class JvmUtil {
         return false;
     }
 
-    public static void printAll() {
-        System.out.println("\nVM Information ");
-        System.out.println("=============================================");
-        System.out.println("VM Name:            " + vmName());
-        System.out.println("VM Version:         " + vmVersion());
-        System.out.println("VM Spec Version:    " + vmSpecVersion());
-        System.out.println("VM Arch:            " + vmArch());
-
-        System.out.println("\n\nJRE Information ");
-        System.out.println("=============================================");
-        System.out.println("JRE Version:        " + jreVersion());
-        System.out.println("JRE Spec Version:   " + jreSpecVersion());
-
-        System.out.println("\n\nOS Information ");
-        System.out.println("=============================================");
-        System.out.println("OS Architecture:    " + osArch());
-
-        System.out.println("\n\nMemory Information");
-        System.out.println("=============================================");
-        System.out.println("Initial Memory:       " + printableBytes(initialMemory()));
-        System.out.println("Used Memory:          " + printableBytes(usedMemory()));
-        System.out.println("Committed  Memory:    " + printableBytes(committedMemory()));
-        System.out.println("Max Memory:           " + printableBytes(maxMemory()));
-
-    }
-
-
-    private static String printableBytes(long size) {
-        long K = 1  * 1024;
-        long M = K * 1024;
-        long G = M * 1024;
-        long T = G * 1024;
-
-        if (size <  K)                return format(size) + " Byte";
-        if (size >= K && size < M)    return format((double) size / K) + " KB";
-        if (size >= M && size < G)    return format((double) size / M) + " MB";
-        if (size >= G && size < T)    return format((double) size / G) + " GB";
-        if (size >= T)                return format((double) size / T) + " TB";
-
-        return "";
-    }
-
-    private static String format(double d) {
-        return new DecimalFormat("#.##").format(d);
-    }
-
     // List of properties
    // http://docs.oracle.com/javase/6/docs/api/java/lang/System.html#getProperties%28%29
 

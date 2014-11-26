@@ -1,12 +1,13 @@
 package com.arturmkrtchyan.sizeof4j;
 
+import com.arturmkrtchyan.sizeof4j.util.ConsoleUtil;
 import com.arturmkrtchyan.sizeof4j.util.JvmUtil;
 
 class Main {
 
     public static void main(String[] args) {
 
-        JvmUtil.printAll();
+        ConsoleUtil.printJvmDetails();
 
         System.out.println("\n\nSizeOf");
         System.out.println("=================================");

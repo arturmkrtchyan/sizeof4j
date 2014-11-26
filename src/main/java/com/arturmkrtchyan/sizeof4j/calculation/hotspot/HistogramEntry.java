@@ -15,14 +15,4 @@ class HistogramEntry {
     HistogramEntry(final String className, final String count, final String bytes) {
         this(className, Integer.valueOf(count), Integer.valueOf(bytes));
     }
-
-    @Override
-    public String toString() {
-        final StringBuilder sb = new StringBuilder("HistogramEntry{");
-        sb.append("count=").append(count);
-        sb.append(", bytes=").append(bytes);
-        sb.append(", className='").append(className).append('\'');
-        sb.append('}');
-        return sb.toString();
-    }
 }
