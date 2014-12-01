@@ -4,7 +4,7 @@
 
     <groupId>com.arturmkrtchyan.sizeof4j</groupId>
     <artifactId>sizeof4j</artifactId>
-    <version>0.1.0</version>
+    <version>0.1.1-SNAPSHOT</version>
 
     <licenses>
         <license>
@@ -22,7 +22,7 @@
         <connection>scm:git:git@github.com:arturmkrtchyan/sizeof4j.git</connection>
         <developerConnection>scm:git:git@github.com:arturmkrtchyan/sizeof4j.git</developerConnection>
         <url>git@github.com:arturmkrtchyan/sizeof4j.git</url>
-        <tag>sizeof4j-0.1.0</tag>
+        <tag>HEAD</tag>
     </scm>
 
     <developers>
