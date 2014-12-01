@@ -69,7 +69,7 @@ public class SizeOfTest {
     public void stringShallowSize() {
         switch (memoryLayout) {
             case Layout32:
-                assertEquals("String size must be 16", 16,
+                assertEquals("String size must be 24", 24,
                         SizeOf.shallowSize(String.class));
                 break;
             case Layout64 :
