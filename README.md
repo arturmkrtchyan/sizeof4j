@@ -58,7 +58,7 @@ class Main {
         out.println("|           Arrays         |");
         out.println(" --------------------------");
         out.println("int[]:      " + SizeOf.shallowSize(new int[]{}));
-        out.println("int[2]:      " + SizeOf.shallowSize(new int[]{1, 2}));
+        out.println("int[2]:     " + SizeOf.shallowSize(new int[]{1, 2}));
         out.println("int[].class " + SizeOf.shallowSize(int[].class));
         out.println("C[].class   " + SizeOf.shallowSize(C[].class));
         out.println("C[2]:       " + SizeOf.shallowSize(new C[]{new C(), new C()}));
