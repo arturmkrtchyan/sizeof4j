@@ -87,5 +87,14 @@ class Main {
 }
 ```
 
+#### Maven dependency: 
+```
+<dependency>
+    <groupId>com.arturmkrtchyan.sizeof4j</groupId>
+    <artifactId>sizeof4j</artifactId>
+    <version>0.1.0</version>
+</dependency>
+```
+
 ![Compatibility Badge](https://java.net/downloads/adoptopenjdk/compat.svg)
 
